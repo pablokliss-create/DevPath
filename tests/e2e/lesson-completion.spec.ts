@@ -1,0 +1,2 @@
+import { test,expect } from '@playwright/test';
+test('lesson completion persists locally and changes roadmap state',async({page})=>{await page.goto('/pt-BR/course/variables');await page.getByRole('button',{name:'Marcar como concluída'}).click();await expect(page.getByRole('button',{name:'Concluída'})).toBeDisabled();await page.reload();await expect(page.getByRole('button',{name:'Concluída'})).toBeDisabled();await page.goto('/pt-BR/course');await expect(page.getByRole('link',{name:/Variáveis:/}).getByText('Concluída')).toBeVisible();});
