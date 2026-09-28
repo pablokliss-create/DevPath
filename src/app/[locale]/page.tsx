@@ -1,8 +1,2 @@
-import { notFound } from 'next/navigation';
-const locales = new Set(['pt-BR', 'en']);
-export default async function LocalePage({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
-  if (!locales.has(locale)) notFound();
-  const title = locale === 'pt-BR' ? 'DevPath - aprenda programacao entendendo de verdade' : 'DevPath - learn programming by truly understanding it';
-  return <main><h1>{title}</h1></main>;
-}
+import { notFound } from 'next/navigation'; import { isLocale } from '@/i18n/config';
+export default async function LocalePage({params}:{params:Promise<{locale:string}>}){const{locale}=await params;if(!isLocale(locale))notFound();const pt=locale==='pt-BR';return <main className="hero"><p>{pt?'Livro + laboratório para aprender fazendo.':'Book + laboratory learning by doing.'}</p><h1>{pt?'Aprenda programação entendendo de verdade o que o código faz.':'Learn programming by truly understanding what the code does.'}</h1></main>;}

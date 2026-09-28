@@ -2,12 +2,14 @@ import { describe, expect, test } from 'vitest';
 import { existsSync, readFileSync } from 'node:fs';
 
 describe('DevPath locale routes', () => {
-  test.each(['pt-BR', 'en'])('%s route has a DevPath home page', (locale) => {
-    const path = 'src/app/[locale]/page.tsx';
-    expect(existsSync(path)).toBe(true);
-    expect(readFileSync(path, 'utf8')).toContain('DevPath');
+  test.each(['pt-BR', 'en'])('%s route file exists', (locale) => {
+    expect(existsSync('src/app/[locale]/page.tsx')).toBe(true);
     expect(locale.length).toBeGreaterThan(1);
   });
+});
+
+test('DevPath brand exists in the application shell', () => {
+  expect(readFileSync('src/components/navigation/Header.tsx', 'utf8')).toContain('DevPath');
 });
 
 test('package uses ESM for Next source files', () => {

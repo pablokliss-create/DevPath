@@ -1,4 +1,2 @@
-import type { ReactNode } from 'react';
-export default async function LocaleLayout({ children }: { children: ReactNode }) {
-  return <>{children}</>;
-}
+import type { ReactNode } from 'react'; import { notFound } from 'next/navigation'; import { AppShell } from '@/components/navigation/AppShell'; import { isLocale } from '@/i18n/config';
+export default async function LocaleLayout({children,params}:{children:ReactNode;params:Promise<{locale:string}>}){const{locale}=await params;if(!isLocale(locale))notFound();return <AppShell locale={locale}>{children}</AppShell>;}
