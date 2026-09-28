@@ -1,0 +1,2 @@
+import type { Locale } from '@/i18n/config';import type { ProjectStudy } from './catalog';
+export function ProjectExampleCard({project,locale}:{project:ProjectStudy;locale:Locale}){const pt=locale==='pt-BR';return <article className="card projectCard"><span className="eyebrow">{project.level}</span><h2>{project.id}</h2><p>{pt?project.description.ptBR:project.description.en}</p><code>{project.path}</code><div className="chipRow">{project.concepts.map(c=><span key={c}>{c}</span>)}</div></article>;}

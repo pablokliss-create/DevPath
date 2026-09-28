@@ -1,2 +1,2 @@
-import { notFound } from 'next/navigation'; import { isLocale } from '@/i18n/config';
-export default async function LocalePage({params}:{params:Promise<{locale:string}>}){const{locale}=await params;if(!isLocale(locale))notFound();const pt=locale==='pt-BR';return <main className="hero"><p>{pt?'Livro + laboratório para aprender fazendo.':'Book + laboratory learning by doing.'}</p><h1>{pt?'Aprenda programação entendendo de verdade o que o código faz.':'Learn programming by truly understanding what the code does.'}</h1></main>;}
+import { notFound } from 'next/navigation';import { isLocale } from '@/i18n/config';import { DashboardHome } from '@/features/course/DashboardHome';
+export default async function LocalePage({params}:{params:Promise<{locale:string}>}){const{locale}=await params;if(!isLocale(locale))notFound();return <DashboardHome locale={locale}/>;}
