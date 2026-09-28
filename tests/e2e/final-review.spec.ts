@@ -1,0 +1,5 @@
+import { test,expect } from '@playwright/test';
+test('PT-BR progress summary is localized',async({page})=>{await page.goto('/pt-BR/progress');const summary=page.getByLabel('Resumo do progresso');await expect(summary).toBeVisible();await expect(summary).toContainText('aulas concluídas');});
+test('language switch remains visible on a narrow phone',async({page})=>{await page.setViewportSize({width:390,height:844});await page.goto('/pt-BR');await expect(page.getByRole('link',{name:'English'})).toBeVisible();});
+test('browser lab degrades gracefully when Worker is unavailable',async({page})=>{await page.addInitScript(()=>{Object.defineProperty(window,'Worker',{value:undefined,configurable:true});});await page.goto('/en/course/variables');await page.getByRole('button',{name:'Run code'}).click();await expect(page.getByRole('status')).toContainText(/not available/i);await expect(page.getByRole('button',{name:'Run code'})).toBeEnabled();});
+test('system dark preference is honored when no manual theme exists',async({page})=>{await page.emulateMedia({colorScheme:'dark'});await page.goto('/en');await expect(page.locator('html')).toHaveAttribute('data-theme','dark');});

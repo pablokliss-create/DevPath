@@ -27,6 +27,13 @@ export function collectContentIssues(candidates: unknown[] = lessons): string[] 
       blockIds.add(block.id);
     }
   }
+  const knownSlugs = new Set<string>();
+  for (const raw of candidates) { const parsed = lessonSchema.safeParse(raw); if (parsed.success) knownSlugs.add(parsed.data.slug); }
+  for (const raw of candidates) {
+    const parsed = lessonSchema.safeParse(raw); if (!parsed.success) continue;
+    for (const prerequisite of parsed.data.prerequisites) if (!knownSlugs.has(prerequisite)) issues.push(`${parsed.data.slug}: unknown prerequisite ${prerequisite}`);
+    for (const block of parsed.data.blocks) if (block.exercise?.kind === 'multiple-choice' && (!block.exercise.options || block.exercise.options.length < 2)) issues.push(`${parsed.data.slug}: multiple-choice ${block.id} needs at least 2 options`);
+  }
   return issues;
 }
 
