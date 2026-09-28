@@ -1,0 +1,2 @@
+'use client';import { useProgress } from './ProgressProvider';
+export function ProgressSummary(){const{state}=useProgress();return <section className="card" aria-label="Progress"><strong>{state.completedLessons.length}</strong> {state.completedLessons.length===1?'lesson completed':'lessons completed'}{state.recoveryWarning&&<p role="status">{state.recoveryWarning==='save-failed'?'Progress could not be saved.':'Progress data was recovered safely.'}</p>}</section>;}
