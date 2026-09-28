@@ -171,3 +171,18 @@ The product also avoids hard-locking lessons, fake completion based solely on sc
 DevPath is a premium-tech, bilingual programming learning platform built around comfortable reading plus meaningful practice. It uses Next.js and TypeScript, data-driven lessons, official-source references, local-first progress with future sync boundaries, browser labs where technically honest, guided PC labs elsewhere, real-project examples, accessible light/dark themes, a recommended but unlocked roadmap, a strong professional core, and optional specialization tracks.
 
 This specification captures the design decisions approved in conversation. Product implementation begins only after this written specification is reviewed and approved, followed by a separate implementation plan.
+## 19. Research corpus and source pipeline
+
+DevPath should maintain a structured programming knowledge corpus used to author and review lessons. The goal is not to copy documentation into the product, but to keep each lesson traceable to current, authoritative material.
+
+The research pipeline may combine multiple source classes when they are useful: official documentation websites, standards/specifications, official PDFs and manuals, official or canonical GitHub repositories, release notes/changelogs, Context7 for current library documentation and examples when connected, the user's own repositories for real-project examples, and carefully selected secondary material only when it adds teaching context.
+
+Tool choice is relevance-based rather than "use every plugin regardless of purpose". GitHub is used for canonical source code, releases, examples, issues, and project history; web research is used for current official docs and standards; PDF/document tools are used for specifications and manuals; Context7 is preferred for version-sensitive library/API lookups when available; design tools such as Figma may support interface review but are not treated as technical authorities.
+
+Each lesson's research record should capture at least: topic, technology/library, relevant version, source title, source URL or repository reference, source type, date checked, specific claim/concept supported, and whether the source is primary or supplementary.
+
+When sources disagree, DevPath should prefer the authoritative source for the relevant version and explicitly note meaningful version differences instead of silently averaging conflicting information. Examples taken from repositories must be checked against the documented API and the version used in the lesson.
+
+The corpus should support periodic review. Version-sensitive lessons can be flagged when a dependency or platform releases a major update, so outdated material can be rechecked before being presented as current.
+
+This source pipeline is part of content quality, not an optional bibliography step. A lesson is not ready for publication until its important technical claims have traceable support and its examples have been validated against the intended environment.
