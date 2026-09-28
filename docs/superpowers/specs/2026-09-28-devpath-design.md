@@ -1,4 +1,4 @@
-# DevPath — Design Specification
+# DevPath â€” Design Specification
 
 **Date:** 2026-09-28  
 **Status:** Awaiting user review  
@@ -40,7 +40,7 @@ The site supports both light and dark themes. Light mode is the reading-first de
 The first visit follows the operating-system theme when available. A persistent manual theme switch is always available, and the learner's manual choice is remembered locally.
 ## 5. Main information architecture
 
-Primary navigation is intentionally small: **Home · Course · Laboratory · Projects · Glossary · Progress**. Language and theme controls remain easy to reach without dominating the interface.
+Primary navigation is intentionally small: **Home Â· Course Â· Laboratory Â· Projects Â· Glossary Â· Progress**. Language and theme controls remain easy to reach without dominating the interface.
 
 ### Home
 
@@ -87,7 +87,7 @@ A lesson is assembled from reusable content blocks rather than hand-coded as a u
 
 Typical blocks include: concept explanation, analogy, worked example, annotated code, line-by-line trace, prediction question, multiple choice, reorder code, fill-the-gap, bug hunt, compare-solutions task, runnable editor, guided PC lab, project excerpt, glossary terms, recap, reflection prompt, and official sources.
 
-The standard learning rhythm is **understand → predict → manipulate → test → explain → apply → review**, but not every lesson must use every step. Variety is deliberate.
+The standard learning rhythm is **understand â†’ predict â†’ manipulate â†’ test â†’ explain â†’ apply â†’ review**, but not every lesson must use every step. Variety is deliberate.
 
 Optional "understand more" sections hold extra depth such as runtime details, edge cases, historical context, or professional terminology. They are expandable so the main lesson remains readable.
 
@@ -162,16 +162,11 @@ Only after that slice is validated should lesson production scale across the pro
 
 ## 17. First-release boundaries
 
-Version one does **not** require login, cloud synchronization, payments, social rankings, streak pressure, certificates, live tutoring, or a remote multi-language execution server. These can be considered later only when they clearly improve learning or distribution.
+Version one does **not** require login, cloud synchronization, payments, social rankings, streak pressure, certificates, live human tutoring, or a remote multi-language execution server. These can be considered later only when they clearly improve learning or distribution.
 
 The product also avoids hard-locking lessons, fake completion based solely on scroll position, excessive gamification, unexplained jargon, and unsourced technical claims.
 
-## 18. Approved design summary
-
-DevPath is a premium-tech, bilingual programming learning platform built around comfortable reading plus meaningful practice. It uses Next.js and TypeScript, data-driven lessons, official-source references, local-first progress with future sync boundaries, browser labs where technically honest, guided PC labs elsewhere, real-project examples, accessible light/dark themes, a recommended but unlocked roadmap, a strong professional core, and optional specialization tracks.
-
-This specification captures the design decisions approved in conversation. Product implementation begins only after this written specification is reviewed and approved, followed by a separate implementation plan.
-## 19. Research corpus and source pipeline
+## 18. Research corpus and source pipeline
 
 DevPath should maintain a structured programming knowledge corpus used to author and review lessons. The goal is not to copy documentation into the product, but to keep each lesson traceable to current, authoritative material.
 
@@ -186,3 +181,39 @@ When sources disagree, DevPath should prefer the authoritative source for the re
 The corpus should support periodic review. Version-sensitive lessons can be flagged when a dependency or platform releases a major update, so outdated material can be rechecked before being presented as current.
 
 This source pipeline is part of content quality, not an optional bibliography step. A lesson is not ready for publication until its important technical claims have traceable support and its examples have been validated against the intended environment.
+## 19. DevPath AI tutor
+
+DevPath includes a contextual AI tutor opened from a persistent button into a panel that slides from right to left. The tutor is part of the learning experience, not a general-purpose assistant.
+
+The tutor receives the current lesson, module, exercise, relevant glossary concepts, and approved course-source context when useful. It should be able to explain a line of code, rephrase a concept, connect the current question to a previous lesson, interpret common errors, and suggest where in the course the learner should review a prerequisite.
+
+The tutor follows a **hints-first** teaching policy for exercises. Its default escalation path is: ask a guiding question or give a small clue, then give a stronger clue, then explain the relevant concept, and only reveal a complete solution when the learner has attempted the task or explicitly asks to reveal it. When revealing a full answer, it should still explain the reasoning rather than output only final code.
+
+The tutor must stay inside the DevPath scope. Questions unrelated to programming, software development, the course, or the approved technical corpus receive a brief scope message instead of a general answer. It must not pretend to know material that is absent from the approved corpus; uncertainty should be stated clearly.
+
+### Read-only security boundary
+
+The AI tutor is structurally read-only. It is not given tools or credentials that can edit course content, modify source files, execute administrative commands, change deployment configuration, mutate the knowledge base, delete records, or perform privileged actions on behalf of the learner.
+
+Protection must not depend only on a system prompt. Server-side capability restrictions, allowlisted retrieval sources, request validation, rate/size limits, secret isolation, and output handling form the real security boundary. Retrieved documents and learner-provided text are treated as untrusted input so prompt-injection instructions inside content cannot grant new capabilities.
+
+The tutor may read learner context needed for teaching, such as the current page and exercise state, but any future access to personal account data must be explicitly scoped and minimized. The first release should avoid unnecessary personal-data collection.
+
+Answers should cite or identify the relevant DevPath lesson and approved technical source when practical, especially for version-sensitive or factual technical explanations.
+
+The AI integration should sit behind a provider-agnostic server interface so model/provider changes do not require rewriting lesson components. The interface separates retrieval, policy/scope checks, model generation, and UI streaming so each layer can be tested independently.
+### Hint quality requirements
+
+The DevPath AI tutor must provide **substantive hints**, not filler. Responses such as "read the question again", "try again", "think harder", or equivalent generic nudges do not count as useful help and should not be used in place of teaching.
+
+A useful hint should measurably reduce uncertainty while preserving part of the challenge. Depending on the exercise, the tutor may identify the exact concept involved, point to a relevant line or condition, trace one execution step, explain a runtime or syntax error, show a smaller analogous example, eliminate an incorrect approach, provide a partial code scaffold, or ask one specific guiding question that advances the solution.
+
+Hint escalation is adaptive: concrete clue -> stronger clue or partial worked step -> direct concept explanation tied to the learner's code -> full solution when the learner has made a reasonable attempt or explicitly requests reveal. If the learner remains stuck, the tutor becomes more explicit instead of repeating the same vague advice in different words.
+
+When a full solution is revealed, it must explain why it works and what reasoning gap or mistake was involved. The goal is to help the learner progress, not to create artificial friction.
+
+## 20. Approved design summary
+
+DevPath is a premium-tech, bilingual programming learning platform built around comfortable reading plus meaningful practice. It uses Next.js and TypeScript, data-driven lessons, a traceable official-source research corpus, local-first progress with future sync boundaries, browser labs where technically honest, guided PC labs elsewhere, real-project examples, accessible light/dark themes, a recommended but unlocked roadmap, a strong professional core, optional specialization tracks, and a read-only contextual AI tutor that stays within DevPath's educational scope and gives substantive hints before revealing solutions.
+
+This specification captures the design decisions approved in conversation. Product implementation begins only after this written specification is reviewed and approved, followed by a separate implementation plan.
