@@ -1,0 +1,2 @@
+import type { LessonBlock } from '@/features/course/schema';import type { Locale } from '@/i18n/config';
+export function ExercisePlaceholder({block,locale}:{block:LessonBlock;locale:Locale}){const ex=block.exercise;if(!ex)return null;return <section className="exerciseBlock" data-kind={ex.kind}><span className="eyebrow">{locale==='pt-BR'?'Prática':'Practice'}</span><p>{locale==='pt-BR'?ex.prompt.ptBR:ex.prompt.en}</p></section>;}
