@@ -1,0 +1,2 @@
+import { notFound } from 'next/navigation';import { getLesson } from '@/features/course/catalog';import { isLocale } from '@/i18n/config';import { LessonRenderer } from '@/features/lesson/LessonRenderer';
+export default async function LessonPage({params}:{params:Promise<{locale:string;slug:string}>}){const{locale,slug}=await params;if(!isLocale(locale))notFound();const lesson=getLesson(slug);if(!lesson)notFound();return <LessonRenderer lesson={lesson} locale={locale}/>;}

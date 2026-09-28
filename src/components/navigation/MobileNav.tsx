@@ -1,0 +1,1 @@
+'use client'; import type { Locale } from '@/i18n/config'; import { Header } from './Header'; export function MobileNav({locale}:{locale:Locale}){return <div className="mobileNav"><Header locale={locale}/></div>;}

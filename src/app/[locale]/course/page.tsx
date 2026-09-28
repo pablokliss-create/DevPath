@@ -1,0 +1,2 @@
+import { notFound } from 'next/navigation';import { isLocale } from '@/i18n/config';import { CourseRoadmap } from '@/features/course/CourseRoadmap';
+export default async function CoursePage({params}:{params:Promise<{locale:string}>}){const{locale}=await params;if(!isLocale(locale))notFound();return <main className="standardPage"><h1>{locale==='pt-BR'?'Mapa do curso':'Course map'}</h1><CourseRoadmap locale={locale}/></main>;}

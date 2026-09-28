@@ -1,0 +1,4 @@
+import { expect,test } from 'vitest'; import { getLesson,getAdjacentLessons,validateCatalog,lessons } from '@/features/course/catalog';
+test('catalog validates unique slugs and references',()=>{expect(validateCatalog()).toBe(true);expect(new Set(lessons.map(l=>l.slug)).size).toBe(lessons.length);});
+test('missing lesson and adjacency fail safely',()=>{expect(getLesson('missing')).toBeNull();expect(getAdjacentLessons('missing')).toBeNull();});
+test('representative lessons keep PT-BR and English in every localized block',()=>{for(const lesson of lessons){expect(lesson.title.ptBR).toBeTruthy();expect(lesson.title.en).toBeTruthy();for(const block of lesson.blocks){if(block.content){expect(block.content.ptBR).toBeTruthy();expect(block.content.en).toBeTruthy();}if(block.exercise){expect(block.exercise.prompt.ptBR).toBeTruthy();expect(block.exercise.prompt.en).toBeTruthy();}}}});

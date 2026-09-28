@@ -1,0 +1,1 @@
+export function CodeBlock({code,language}:{code:string;language?:string}){return <section className="codeBlock"><div className="codeLabel">{language??'code'}</div><pre tabIndex={0}><code>{code}</code></pre></section>;}
